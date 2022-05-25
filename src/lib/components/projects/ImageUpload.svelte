@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte'
 	import supabase from '../../supabase'
-
 	export let src: string
 
 	let uploading = false
