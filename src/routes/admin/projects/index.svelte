@@ -1,5 +1,5 @@
 <script>
-	import AdminProjects from '$lib/components/projects/AdminProjects.svelte'
+	import AdminProjects from '$lib/views/projects/AdminProjects.svelte'
 import Title from '$lib/components/Title.svelte';
 </script>
 

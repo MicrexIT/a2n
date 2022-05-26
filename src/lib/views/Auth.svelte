@@ -1,13 +1,12 @@
 <script lang="ts">
-	import { signIn, type SupabaseError } from '../services'
-import Title from './Title.svelte';
+	import Title from '$components/Title.svelte'
+	import { signIn } from '../services'
 
 	let loading = false
 	let email: string
 	const handleLogin = async () => {
 		try {
 			loading = true
-			console.log(email)
 			const { error } = await signIn({ email })
 
 			if (error) throw error

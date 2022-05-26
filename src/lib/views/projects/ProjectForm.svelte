@@ -1,13 +1,13 @@
 <script lang="ts">
-	import supabase from '../../supabase'
 	import type { PostgrestError } from '@supabase/supabase-js'
+	import supabase from '../../supabase'
 	import { ProjectType, Status, type IProjectEdit } from '../../../types'
 	import { goto } from '$app/navigation'
 	import { onMount } from 'svelte'
-	import TextField from '../form/TextField.svelte'
-	import TextareaField from '../form/TextareaField.svelte'
-	import SelectField from '../form/SelectField.svelte'
-	import ImageUpload from './ImageUpload.svelte'
+	import TextField from '$components/form/TextField.svelte'
+	import TextareaField from '$components/form/TextareaField.svelte'
+	import SelectField from '$components/form/SelectField.svelte'
+	import ImageUpload from '$components/form/ImageUpload.svelte'
 
 	let loading = true
 	let description: ''

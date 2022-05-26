@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store'
+import supabase from '$lib/supabase'
 import type { IProject } from "../types"
-import supabase from '../lib/supabase'
 
 export const projects = writable<IProject[]>([])
 

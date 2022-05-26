@@ -1,27 +1,12 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte'
 	import supabase from '../../supabase'
-	export let src: string
 
+	export let src: string
 	let uploading = false
 	let files: FileList
 
 	const dispatch = createEventDispatcher()
-
-	async function getImageUrl(): Promise<SvelteActionReturnType> {
-		try {
-			const { data, error } = await supabase.storage.from('projects-images').getPublicUrl(path)
-			if (error) throw error
-			if (!data) throw 'no image uploaded'
-
-			// src = URL.createObjectURL(data)
-			src = data.publicURL
-			console.log(src)
-		} catch (error) {
-			console.error('Error downloading image: ')
-			console.error(error)
-		}
-	}
 
 	async function uploadImage() {
 		try {

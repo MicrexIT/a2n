@@ -1,5 +1,5 @@
 <script>
-	import AboutUs from '$lib/components/AboutUs.svelte'
+	import AboutUs from '$views/AboutUs.svelte'
 </script>
 
 <AboutUs />

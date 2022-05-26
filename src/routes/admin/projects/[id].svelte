@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ProjectForm from '../../../lib/components/projects/ProjectForm.svelte'
+	import ProjectForm from '$views/projects/ProjectForm.svelte'
 
 	export let id: number
 	console.log('admin project id')

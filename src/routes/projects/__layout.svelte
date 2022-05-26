@@ -2,7 +2,7 @@
 	import { browser } from '$app/env'
 
 	import { goto } from '$app/navigation'
-	import { user } from '../../stores/authStore'
+	import { user } from '$stores/authStore'
 
 	$: if (browser && !$user) {
 		goto('/auth')

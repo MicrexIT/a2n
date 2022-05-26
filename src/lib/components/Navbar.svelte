@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { user } from '../../stores/authStore'
+	import { user } from '$stores/authStore'
 	import { signOut } from '../services'
 	import supabase from '../supabase'
 

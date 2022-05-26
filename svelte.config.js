@@ -1,5 +1,6 @@
 import preprocess from 'svelte-preprocess'
 import vercel from '@sveltejs/adapter-vercel'
+import { resolve } from 'path'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -16,7 +17,16 @@ const config = {
 	// }
 
 	kit: {
-		// default options are shown
+		vite: {
+			resolve: {
+				alias: {
+					$lib: resolve('./src/lib'),
+					$components: resolve('./src/lib/components'),
+					$views: resolve('./src/lib/views'),
+					$stores: resolve('./src/stores')
+				}
+			}
+		},
 		adapter: vercel({
 			// if true, will deploy the app using edge functions
 			// (https://vercel.com/docs/concepts/functions/edge-functions)

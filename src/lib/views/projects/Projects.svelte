@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { loadProjects, projects } from '../../../stores/projectsStore'
+	import { loadProjects, projects } from '$stores/projectsStore'
 	import { onMount } from 'svelte'
 	import type { IProject } from '../../../types'
-	import ProjectCard from '../../../lib/components/projects/ProjectCard.svelte'
-import Grid from '../Grid.svelte';
+	import ProjectCard from './ProjectCard.svelte'
+	import Grid from '$components/Grid.svelte'
 
 	let allProjects: IProject[]
 

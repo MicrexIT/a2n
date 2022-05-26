@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
 	import { onMount } from 'svelte'
-	import supabase from '../../lib/supabase'
+	import supabase from '$lib/supabase'
 
 	let hidden = true
 	onMount(async () => {
@@ -9,15 +9,13 @@
 			const user = supabase.auth.user()
 			if (!user) {
 				goto('/')
+				return
 			}
-			console.log('here')
 			let { data, error, status } = await supabase
 				.from('profiles')
 				.select(`profile_type`)
 				.eq('id', user.id)
 				.single()
-
-			console.log(data)
 
 			if (error && status !== 406) {
 				console.error(error)
