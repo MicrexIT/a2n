@@ -4,6 +4,8 @@
 	import Navbar from '$components/Navbar.svelte'
 	import { user } from '$stores/authStore'
 	import '../app.css'
+	import { fade } from 'svelte/transition'
+	import { cubicInOut } from 'svelte/easing'
 
 	user.set(supabase.auth.user())
 
@@ -12,8 +14,10 @@
 	})
 </script>
 
-<main class="container mx-auto min-h-screen">
+<main class="container relative mx-auto min-h-screen">
 	<Navbar />
-	<slot />
+	<div class="h-full" transition:fade={{ duration: 400, delay: 50, easing: cubicInOut }}>
+		<slot />
+	</div>
 </main>
 <Footer />
