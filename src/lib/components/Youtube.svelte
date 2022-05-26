@@ -132,6 +132,5 @@
 	}
 </script>
 
-<div class={className}>
-	<div {id} bind:this={playerElem} />
-</div>
+<div {id} bind:this={playerElem} class="w-full" />
+<!-- <div {id} bind:this={playerElem} class="w-full md:min-w-full md:max-w-xl" /> -->
