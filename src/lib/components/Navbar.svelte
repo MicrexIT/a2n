@@ -3,8 +3,11 @@
 	import { signOut } from '../services'
 	import supabase from '../supabase'
 
-	$: isAdmin = async () => {
+	let isAdmin = false
+
+	$: async () => {
 		if (!$user) {
+			isAdmin = false
 			return false
 		}
 		let { data, error, status } = await supabase
@@ -17,12 +20,15 @@
 
 		if (error && status !== 406) {
 			console.error(error)
+			isAdmin = false
 			return false
 		}
 
-		if (data.profile_type !== 'admin') {
+		if (!data || data.profile_type !== 'admin') {
+			isAdmin = false
 			return false
 		}
+		isAdmin = true
 		return true
 	}
 </script>
