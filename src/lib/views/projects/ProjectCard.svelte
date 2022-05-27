@@ -2,7 +2,6 @@
 	import type { IProject } from '../../../types'
 
 	export let project: IProject
-	console.log(project.picture)
 </script>
 
 <div class="card h-full bg-base-100 shadow-xl">

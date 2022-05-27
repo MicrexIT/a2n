@@ -1,29 +1,16 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
 	import { onMount } from 'svelte'
-	import supabase from '$lib/supabase'
+	import { user } from '../../stores/authStore'
 
 	let hidden = true
 	onMount(async () => {
 		try {
-			const user = supabase.auth.user()
-			if (!user) {
+			if (!$user) {
 				goto('/')
 				return
 			}
-			let { data, error, status } = await supabase
-				.from('profiles')
-				.select(`profile_type`)
-				.eq('id', user.id)
-				.single()
-
-			if (error && status !== 406) {
-				console.error(error)
-				goto('/')
-				return
-			}
-
-			if (data.profile_type !== 'admin') {
+			if ($user.user_metadata.profileType !== 'admin') {
 				goto('/')
 				return
 			}

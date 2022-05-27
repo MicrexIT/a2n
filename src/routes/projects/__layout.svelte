@@ -8,6 +8,7 @@
 
 	$: if (browser && !$user) {
 		goto('/auth')
+
 	}
 	onMount(() => {
 		loadProjects()

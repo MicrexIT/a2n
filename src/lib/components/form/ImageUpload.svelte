@@ -20,13 +20,6 @@
 			const fileExt = file.name.split('.').pop()
 			const fileName = `${Math.random()}.${fileExt}`
 			const filePath = `${fileName}`
-			// const { data, error: errorbucket } = await supabase.storage.getBucket('projects-images')
-			// if (errorbucket) {
-			// 	console.error(errorbucket)
-			// 	return
-			// }
-			// console.log('received bucket')
-			// console.log(data)
 
 			let { error: uploadError } = await supabase.storage
 				.from('projects-images')
@@ -42,7 +35,6 @@
 
 			// src = URL.createObjectURL(data)
 			src = data.publicURL
-			console.log(src)
 			dispatch('upload')
 		} catch (error) {
 			alert((error as any).message)

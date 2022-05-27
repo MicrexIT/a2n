@@ -1,3 +1,4 @@
+import { user } from "../stores/authStore"
 import supabase from "./supabase"
 // import 
 
@@ -25,10 +26,35 @@ export async function signIn({ email }: SignInProps): Promise<AuthResponse> {
   const { error } = await supabase.auth.signIn({ email }, {
     redirectTo
   })
-  return { ok: !error, error }
+
+  const supabaseUser = supabase.auth.user()
+  if (error || !supabaseUser) {
+    return { ok: false, error }
+  }
+
+  const { data, error: profileError, status } = await supabase
+    .from('profiles')
+    .select(`profile_type`)
+    .eq('id', supabaseUser.id)
+    .single()
+
+
+  if (profileError && status !== 406) {
+    console.error(profileError)
+    return { ok: true, error }
+  }
+
+  user.set({
+    ...supabaseUser, user_metadata: {
+      profileType: data.profile_type ?? "viewer"
+    }
+  })
+
+  return { ok: true, error }
 }
 
 export async function signOut(): Promise<AuthResponse> {
   const { error } = await supabase.auth.signOut()
+  user.set(null)
   return { ok: !error, error }
 }

@@ -4,9 +4,14 @@
 	import Auth from '$views/Auth.svelte'
 	import { user } from '$stores/authStore'
 
+	let show = false
 	$: if (browser && $user) {
 		goto('/projects')
+	} else {
+		show = true
 	}
 </script>
 
-<Auth />
+{#if show}
+	<Auth />
+{/if}

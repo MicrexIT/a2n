@@ -17,7 +17,7 @@
 	let type = ProjectType.RECURRING
 	let where = ''
 	export let id: number = 0
-	console.log(id)
+
 	const statusOptions = [
 		Status.DRAFT,
 		Status.PLANNED,
@@ -61,7 +61,6 @@
 	})
 
 	async function updateProject() {
-		console.log('updating')
 		try {
 			loading = true
 			const user = supabase.auth.user()

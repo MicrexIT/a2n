@@ -1,36 +1,9 @@
 <script lang="ts">
+	import { goto } from '$app/navigation'
 	import { user } from '$stores/authStore'
 	import { signOut } from '../services'
-	import supabase from '../supabase'
 
-	let isAdmin = false
-
-	$: async () => {
-		if (!$user) {
-			isAdmin = false
-			return false
-		}
-		let { data, error, status } = await supabase
-			.from('profiles')
-			.select(`profile_type`)
-			.eq('id', $user.id)
-			.single()
-
-		console.log(data)
-
-		if (error && status !== 406) {
-			console.error(error)
-			isAdmin = false
-			return false
-		}
-
-		if (!data || data.profile_type !== 'admin') {
-			isAdmin = false
-			return false
-		}
-		isAdmin = true
-		return true
-	}
+	let isAdmin = !!$user && $user.user_metadata && $user.user_metadata.profileType === 'admin'
 </script>
 
 <div class="navbar sticky top-0 left-0 right-0 bg-base-100 z-10">
@@ -73,7 +46,14 @@
 				<li><a href="/about">About us</a></li>
 				{#if !!$user}
 					<li><a href="/projects">Projects</a></li>
-					<li><button on:click={signOut}>Log out</button></li>
+					<li>
+						<button
+							on:click={async () => {
+								await signOut()
+								goto('/')
+							}}>Log out</button
+						>
+					</li>
 				{:else}
 					<li><a href="/auth">Log in</a></li>
 				{/if}
